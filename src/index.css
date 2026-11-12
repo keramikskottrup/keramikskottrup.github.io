@@ -1,0 +1,309 @@
+:root {
+  --bg: #efe6d8;
+  --bg-deep: #e3d5c0;
+  --card: #fbf7f0;
+  --ink: #2b2620;
+  --muted: #7a6c5b;
+  --line: #ddd0bd;
+  --gold: #b8913a;
+  --gold-soft: #f3e7c8;
+  --sage: #a9b8a0;
+  --shadow: 0 30px 60px -30px rgba(60, 42, 20, 0.45), 0 12px 24px -16px rgba(60, 42, 20, 0.25);
+
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.7), transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(169, 184, 160, 0.35), transparent 50%),
+    linear-gradient(160deg, var(--bg), var(--bg-deep));
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Utility classes used inline in SVG icons */
+.fill-current {
+  fill: currentColor;
+}
+.stroke-none {
+  stroke: none;
+}
+
+/* ---------- Layout ---------- */
+
+.page-shell {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  overflow: hidden;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.27 0 0 0 0 0.18 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.profile-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (min-width: 760px) {
+  .profile-card {
+    grid-template-columns: 1.05fr 1fr;
+    min-height: 540px;
+  }
+}
+
+/* ---------- Photo ---------- */
+
+.photo-panel {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--bg-deep);
+}
+
+@media (min-width: 760px) {
+  .photo-panel {
+    aspect-ratio: auto;
+  }
+}
+
+.studio-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(43, 38, 32, 0.35));
+}
+
+.maker-mark {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  padding: 5px;
+  background: var(--card);
+  box-shadow: 0 10px 24px -10px rgba(43, 38, 32, 0.5);
+  z-index: 2;
+}
+
+.maker-mark img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: scale(1.08); /* crop the dark corners of the logo JPG */
+}
+
+.maker-mark {
+  overflow: hidden;
+}
+
+@media (min-width: 760px) {
+  .maker-mark {
+    left: auto;
+    right: 0;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+    width: 124px;
+    height: 124px;
+  }
+}
+
+/* ---------- Content ---------- */
+
+.content-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  padding: 76px 24px 32px;
+  text-align: center;
+}
+
+@media (min-width: 760px) {
+  .content-panel {
+    padding: 56px 56px 56px 88px;
+    text-align: left;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow span {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 8vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+h1 em {
+  display: block;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ---------- Links ---------- */
+
+nav {
+  display: grid;
+  gap: 12px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+  text-align: left;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 24px -16px rgba(120, 90, 30, 0.6);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.social-link strong {
+  flex: 1;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.link-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--gold-soft);
+  color: var(--ink);
+  flex-shrink: 0;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-link:hover .arrow,
+.social-link:focus-visible .arrow {
+  transform: translateX(3px);
+  color: var(--gold);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
